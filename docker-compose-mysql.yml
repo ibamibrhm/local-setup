@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql57:
+    image: mysql:5.7
+    container_name: mysql57-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3357:3306"  # Host:Container
+    networks:
+      - mynetwork
+    volumes:
+      - mysql57_data:/var/lib/mysql
+    restart: always
+
+  mysql80:
+    image: mysql:8.0
+    container_name: mysql80-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3380:3306"  # Host:Container
+    networks:
+      - mynetwork
+    volumes:
+      - mysql80_data:/var/lib/mysql
+    restart: always
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  mysql57_data:
+  mysql80_data:
